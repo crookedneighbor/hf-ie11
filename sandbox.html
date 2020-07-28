@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+
+    <!-- import the webpage's stylesheet -->
+    <style>
+      .card-input {
+        background: red;
+        height: 2.75em;
+      }
+    </style>
+
+    <!-- import the webpage's javascript file -->
+  </head>
+  <body>
+    <form action="/" method="post" id="cardForm" >
+      <label for="card-number">Card Number</label>
+      <div class="card-input" id="card-number"></div>
+
+      <label for="expiration-date">Expiration Date</label>
+      <div class="card-input" id="expiration-date"></div>
+
+      <label for="cvv">CVV</label>
+      <div class="card-input" id="cvv"></div>
+
+      <input type="submit" value="Purchase" id="submit"/>
+
+    </form>
+    <script src="https://js.braintreegateway.com/web/3.30.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.30.0/js/hosted-fields.min.js"></script>
+    <script>var form = document.querySelector('#cardForm');
+      var submit = document.querySelector('#submit');
+      var token = 'eyJ2ZXJzaW9uIjoyLCJlbnZpcm9ubWVudCI6InNhbmRib3giLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjMkZ1WkdKdmVDSXNJbWx6Y3lJNkltaDBkSEJ6T2k4dllYQnBMbk5oYm1SaWIzZ3VZbkpoYVc1MGNtVmxaMkYwWlhkaGVTNWpiMjBpZlEuZXlKbGVIQWlPakUxT1RZd05UTTROVGdzSW1wMGFTSTZJak0zTlRVMVlUTTBMV1UwTnpJdE5HTTJNQzA0WTJWaUxXUTVPR1kwTUdNd04yTmtOU0lzSW5OMVlpSTZJbWhvTkdOd1l6TTVlbkUwY21kcVkyY2lMQ0pwYzNNaU9pSm9kSFJ3Y3pvdkwyRndhUzV6WVc1a1ltOTRMbUp5WVdsdWRISmxaV2RoZEdWM1lYa3VZMjl0SWl3aWJXVnlZMmhoYm5RaU9uc2ljSFZpYkdsalgybGtJam9pYUdnMFkzQmpNemw2Y1RSeVoycGpaeUlzSW5abGNtbG1lVjlqWVhKa1gySjVYMlJsWm1GMWJIUWlPblJ5ZFdWOUxDSnlhV2RvZEhNaU9sc2liV0Z1WVdkbFgzWmhkV3gwSWwwc0luTmpiM0JsSWpwYklrSnlZV2x1ZEhKbFpUcFdZWFZzZENKZExDSnZjSFJwYjI1eklqcDdmWDAudHRVVzNTU05oWWE5ZjJfV2Z4R20xODNqbHJVbWRyamFkLUlZZkxGZC1KcmFDSjl0WlRYeXl6Sm4zNlpFM0hqR0Q5SGlyeE4yQVRvZm5FX2p6Vk4tR2ciLCJjb25maWdVcmwiOiJodHRwczovL2FwaS5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvaGg0Y3BjMzl6cTRyZ2pjZy9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJncmFwaFFMIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbS9ncmFwaHFsIiwiZGF0ZSI6IjIwMTgtMDUtMDgifSwiY2hhbGxlbmdlcyI6WyJjdnYiXSwiY2xpZW50QXBpVXJsIjoiaHR0cHM6Ly9hcGkuc2FuZGJveC5icmFpbnRyZWVnYXRld2F5LmNvbTo0NDMvbWVyY2hhbnRzL2hoNGNwYzM5enE0cmdqY2cvY2xpZW50X2FwaSIsImFzc2V0c1VybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXV0aFVybCI6Imh0dHBzOi8vYXV0aC52ZW5tby5zYW5kYm94LmJyYWludHJlZWdhdGV3YXkuY29tIiwiYW5hbHl0aWNzIjp7InVybCI6Imh0dHBzOi8vb3JpZ2luLWFuYWx5dGljcy1zYW5kLnNhbmRib3guYnJhaW50cmVlLWFwaS5jb20vaGg0Y3BjMzl6cTRyZ2pjZyJ9LCJ0aHJlZURTZWN1cmVFbmFibGVkIjp0cnVlLCJwYXlwYWxFbmFibGVkIjp0cnVlLCJwYXlwYWwiOnsiZGlzcGxheU5hbWUiOiJidCIsImNsaWVudElkIjoiQVZRSmY5YS1iNmptWUZnaW9OcEkyaTU3cnNRa0hqUlpadjRkOURaTFRVMG5CU3Vma2h3QUNBWnhqMGxkdTg1amFzTTAyakZSUEthVElOQ04iLCJwcml2YWN5VXJsIjoiaHR0cDovL2V4YW1wbGUuY29tL3BwIiwidXNlckFncmVlbWVudFVybCI6Imh0dHA6Ly9leGFtcGxlLmNvbS90b3MiLCJiYXNlVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhc3NldHNVcmwiOiJodHRwczovL2NoZWNrb3V0LnBheXBhbC5jb20iLCJkaXJlY3RCYXNlVXJsIjpudWxsLCJhbGxvd0h0dHAiOnRydWUsImVudmlyb25tZW50Tm9OZXR3b3JrIjpmYWxzZSwiZW52aXJvbm1lbnQiOiJvZmZsaW5lIiwidW52ZXR0ZWRNZXJjaGFudCI6ZmFsc2UsImJyYWludHJlZUNsaWVudElkIjoibWFzdGVyY2xpZW50MyIsImJpbGxpbmdBZ3JlZW1lbnRzRW5hYmxlZCI6dHJ1ZSwibWVyY2hhbnRBY2NvdW50SWQiOiJjNXljdzJzdnlrbnp3anR6IiwiY3VycmVuY3lJc29Db2RlIjoiVVNEIn0sIm1lcmNoYW50SWQiOiJoaDRjcGMzOXpxNHJnamNnIiwidmVubW8iOiJvZmYiLCJicmFpbnRyZWVfYXBpIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuc2FuZGJveC5icmFpbnRyZWUtYXBpLmNvbSIsImFjY2Vzc190b2tlbiI6ImV5SjBlWEFpT2lKS1YxUWlMQ0poYkdjaU9pSkZVekkxTmlJc0ltdHBaQ0k2SWpJd01UZ3dOREkyTVRZdGMyRnVaR0p2ZUNJc0ltbHpjeUk2SW1oMGRIQnpPaTh2WVhCcExuTmhibVJpYjNndVluSmhhVzUwY21WbFoyRjBaWGRoZVM1amIyMGlmUS5leUpsZUhBaU9qRTFPVFl3TlRNNE1qSXNJbXAwYVNJNklqQmxNVFEyT0RNNUxUWTVNVGd0TkRrMFpDMWlOekppTFdSbFpqaGtOak0wT0dWbFl5SXNJbk4xWWlJNkltaG9OR053WXpNNWVuRTBjbWRxWTJjaUxDSnBjM01pT2lKb2RIUndjem92TDJGd2FTNXpZVzVrWW05NExtSnlZV2x1ZEhKbFpXZGhkR1YzWVhrdVkyOXRJaXdpYldWeVkyaGhiblFpT25zaWNIVmliR2xqWDJsa0lqb2lhR2cwWTNCak16bDZjVFJ5WjJwalp5SXNJblpsY21sbWVWOWpZWEprWDJKNVgyUmxabUYxYkhRaU9uUnlkV1Y5TENKeWFXZG9kSE1pT2xzaWRHOXJaVzVwZW1VaUxDSnRZVzVoWjJWZmRtRjFiSFFpWFN3aWMyTnZjR1VpT2xzaVFuSmhhVzUwY21WbE9sWmhkV3gwSWwwc0ltOXdkR2x2Ym5NaU9udDlmUS5sQ2VJa2U5Z1IwODVDWjdIaUQ3eWNZZmpnNWlMM3otVVRGV0xvOFJlYjBHdDNmYnlaU1dPTk1XWHdQLTF2MURPWjZjYlhnZElrOS1rT2x2ZXpqR0xvZyJ9fQ==';
+
+      braintree.client.create({
+        authorization: token
+      }, function (err, client) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        braintree.hostedFields.create({
+          client: client,
+          styles: {
+            'input': {
+              'font-size': '14px',
+              'font-family': 'helvetica, tahoma, calibri, sans-serif',
+              'color' : '#3a3a3a',
+              background: 'red'
+            },
+            ':focus': {
+              'color': 'black'
+            },
+            '.invalid': {
+              'color': '#a94442'
+            }
+
+          },
+          fields: {
+            number: {
+              selector: '#card-number',
+              placeholder: '4111 1111 1111 1111'
+            },
+            cvv: {
+              selector: '#cvv',
+              placeholder: '123'
+            },
+            expirationDate: {
+              selector: '#expiration-date',
+              placeholder: 'MM/YYYY'
+            }
+          }
+        }, function (err, hostedFields) {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          submit.removeAttribute('disabled');
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            alert('Fancy submission here');
+            hostedFields.tokenize(function (err, payload) {
+              if (err) {
+                console.error(err);
+                return;
+              }
+
+              // If this was a real integration, this is where you would
+              // send the nonce to your server.
+              console.log('Got a nonce: ' + payload.nonce);
+            });
+          });
+        });
+      });</script>
+  </body>
+</html>

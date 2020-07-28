@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+
+    <!-- import the webpage's stylesheet -->
+    <style>
+      .card-input {
+        background: red;
+        height: 2.75em;
+      }
+    </style>
+
+    <!-- import the webpage's javascript file -->
+  </head>
+  <body>
+    <input type="submit" value="Purchase" id="submit"/>
+
+    <script src="https://js.braintreegateway.com/web/3.63.0/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.63.0/js/paypal-checkout.min.js"></script>
+    <script>
+      var submit = document.querySelector('#submit');
+      var token = 'eyJ2ZXJzaW9uIjoyLCJlbnZpcm9ubWVudCI6InByb2R1Y3Rpb24iLCJhdXRob3JpemF0aW9uRmluZ2VycHJpbnQiOiJleUowZVhBaU9pSktWMVFpTENKaGJHY2lPaUpGVXpJMU5pSXNJbXRwWkNJNklqSXdNVGd3TkRJMk1UWXRjSEp2WkhWamRHbHZiaUlzSW1semN5STZJbWgwZEhCek9pOHZZWEJwTG1KeVlXbHVkSEpsWldkaGRHVjNZWGt1WTI5dEluMC5leUpsZUhBaU9qRTFPVFl3TlRBeU5UVXNJbXAwYVNJNkltTmlaREk0WVRWbExUSXhORFF0TkdZMU1TMDVNalZoTFdJNE0yVTFZelkwTWpnMllpSXNJbk4xWWlJNkluWjNabWN6ZDJkeE9HSXpiak40YzNNaUxDSnBjM01pT2lKb2RIUndjem92TDJGd2FTNWljbUZwYm5SeVpXVm5ZWFJsZDJGNUxtTnZiU0lzSW0xbGNtTm9ZVzUwSWpwN0luQjFZbXhwWTE5cFpDSTZJblozWm1jemQyZHhPR0l6YmpONGMzTWlMQ0oyWlhKcFpubGZZMkZ5WkY5aWVWOWtaV1poZFd4MElqcG1ZV3h6Wlgwc0luSnBaMmgwY3lJNld5SnRZVzVoWjJWZmRtRjFiSFFpWFN3aWMyTnZjR1VpT2xzaVFuSmhhVzUwY21WbE9sWmhkV3gwSWwwc0ltOXdkR2x2Ym5NaU9udDlmUS40aXU4R2JjTFdBaHZxVGdDWGVTMENYczI4TnlqS0tBTFh1a0x6b0R4dV9vM2Z4M2VrVV9YWVVpcVM0VVJ5Y1kybVRBZmsyYTNQWEFJZ0JtcFVibHVyUSIsImNvbmZpZ1VybCI6Imh0dHBzOi8vYXBpLmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvdndmZzN3Z3E4YjNuM3hzcy9jbGllbnRfYXBpL3YxL2NvbmZpZ3VyYXRpb24iLCJncmFwaFFMIjp7InVybCI6Imh0dHBzOi8vcGF5bWVudHMuYnJhaW50cmVlLWFwaS5jb20vZ3JhcGhxbCIsImRhdGUiOiIyMDE4LTA1LTA4In0sImNoYWxsZW5nZXMiOlsiY3Z2Il0sImNsaWVudEFwaVVybCI6Imh0dHBzOi8vYXBpLmJyYWludHJlZWdhdGV3YXkuY29tOjQ0My9tZXJjaGFudHMvdndmZzN3Z3E4YjNuM3hzcy9jbGllbnRfYXBpIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9hc3NldHMuYnJhaW50cmVlZ2F0ZXdheS5jb20iLCJhdXRoVXJsIjoiaHR0cHM6Ly9hdXRoLnZlbm1vLmNvbSIsImFuYWx5dGljcyI6eyJ1cmwiOiJodHRwczovL2NsaWVudC1hbmFseXRpY3MuYnJhaW50cmVlZ2F0ZXdheS5jb20vdndmZzN3Z3E4YjNuM3hzcyJ9LCJ0aHJlZURTZWN1cmVFbmFibGVkIjpmYWxzZSwicGF5cGFsRW5hYmxlZCI6dHJ1ZSwicGF5cGFsIjp7ImRpc3BsYXlOYW1lIjoiQnJhaW50cmVlIERYIEpTIFRlc3RpbmciLCJjbGllbnRJZCI6IkFkcXRqeUJWcGxGeWdNWTV6aUJ0cFprZXJFY0hubHVrV1dHc3pCcmdmNVdERHp0VDFEanlyN1RlTGlTdkJYSzdmNFR6cFFFU0pBM255MHg5IiwicHJpdmFjeVVybCI6Imh0dHBzOi8vZXhhbXBsZS5jb20vcHJpdmFjeSIsInVzZXJBZ3JlZW1lbnRVcmwiOiJodHRwczovL2V4YW1ibGUuY29tL3Rlcm1zIiwiYmFzZVVybCI6Imh0dHBzOi8vYXNzZXRzLmJyYWludHJlZWdhdGV3YXkuY29tIiwiYXNzZXRzVXJsIjoiaHR0cHM6Ly9jaGVja291dC5wYXlwYWwuY29tIiwiZGlyZWN0QmFzZVVybCI6bnVsbCwiYWxsb3dIdHRwIjpmYWxzZSwiZW52aXJvbm1lbnROb05ldHdvcmsiOmZhbHNlLCJlbnZpcm9ubWVudCI6ImxpdmUiLCJ1bnZldHRlZE1lcmNoYW50IjpmYWxzZSwiYnJhaW50cmVlQ2xpZW50SWQiOiJBUktyWVJEaDNBR1hEelc3c09fM2JTa3EtVTFDN0hHX3VXTkMtejU3TGpZU0ROVU9TYU90SWE5cTZWcFciLCJiaWxsaW5nQWdyZWVtZW50c0VuYWJsZWQiOnRydWUsIm1lcmNoYW50QWNjb3VudElkIjoiRXZhbkhhaG5UZXN0X2luc3RhbnQiLCJjdXJyZW5jeUlzb0NvZGUiOiJVU0QifSwibWVyY2hhbnRJZCI6InZ3Zmczd2dxOGIzbjN4c3MiLCJ2ZW5tbyI6Im9mZiIsImFwcGxlUGF5Ijp7InN0YXR1cyI6InByb2R1Y3Rpb24iLCJjb3VudHJ5Q29kZSI6IlVTIiwiY3VycmVuY3lDb2RlIjoiVVNEIiwibWVyY2hhbnRJZGVudGlmaWVyIjoibWVyY2hhbnQuY29tLmJyYWludHJlZXBheW1lbnRzLmFwcGxlcGF5d2ViIiwic3VwcG9ydGVkTmV0d29ya3MiOlsidmlzYSIsIm1hc3RlcmNhcmQiLCJhbWV4IiwiZGlzY292ZXIiXX19';
+
+      braintree.client.create({
+        authorization: token
+      }, function (err, client) {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        braintree.paypalCheckout.create({
+          client: client,
+        }, function (err, pp) {
+          if (err) {
+            console.error(err);
+            return;
+          }
+
+          submit.removeAttribute('disabled');
+
+          submit.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            console.log('attempting');
+
+            pp.createPayment({
+              flow: 'vault'
+            }).then(function (payload) {
+              console.log('payload');
+              console.log(payload);
+            }).catch(function (e) {
+              console.log('error');
+              console.log(e);
+            });
+          });
+        });
+      });</script>
+  </body>
+</html>
